@@ -96,17 +96,14 @@ let getCountry = position => {
     .then(res => res.json())
     .then(data => {
       console.log('Country Detected: ', data.address.country_code.toUpperCase())
-      translateText(data.address.country_code)
+      if (data.address.country_code !== 'us') translateText(data.address.country_code)
     })
 }
 
-// translate header text based on country. May need to lookup country code to get language code.
+// translate header text based on country. May need to lookup country code to get language code, but providing a very generic catch-all solution here.
 let translateText = country => {
-  console.warn('TODO: Translate the text and put it in the header text')
-  // fetch(INSERT_TRANSLATION_API_ENDPOINT_HERE).then(res => res.json()).then(data => {
-  //   let headerTextDivs = document.getElementsByClassName('header-text')
-  //   for (let hdrDiv of headerTextDivs) {
-  //     hdrDiv.innerText = data
-  //   }
-  // })
+  let headerTextDivs = document.getElementsByClassName('header-text')
+  for (let hdrDiv of headerTextDivs) {
+    hdrDiv.innerText = 'Showing from another country'
+  }
 }
