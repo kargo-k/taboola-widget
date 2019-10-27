@@ -1,18 +1,14 @@
 API = 'https://api.taboola.com/1.2/json/apitestaccount/recommendations.get?app.type=web&app.apikey=7be65fc78e52c11727793f68b06d782cff9ede3c&source.id=%2Fdigiday-publishing-summit%2F&source.url=https%3A%2F%2Fblog.taboola.com%2Fdigiday-publishing-summit%2F&source.type=text&placement.organic-type=mix&placement.visible=true&placement.available=true&placement.rec-count=6&placement.name=Below%20Article%20Thumbnails&placement.thumbnail.width=640&placement.thumbnail.height=480&user.session=init'
 GEOCODE_API = 'https://nominatim.openstreetmap.org/reverse?format=json'
 
-fetch(API).then(res => res.json()).then(json => {
-  let data = json.list
-  let contentList = document.getElementsByClassName('content')
-  for (let contentDiv of contentList) {
-    contentDiv.innerHTML = ""
-    contentDiv.className = 'content'
-    render(data, contentDiv)
-  }
-})
+
+
+// render the Taboola Widget in specified location with your choice of text
+let main = document.querySelector('main')
+renderWidget(main, 'You May Like')
 
 // renders the widget on page load with placeholders while the async fetch is completing
-let renderWidget = (div, headerStr) => {
+function renderWidget(div, headerStr) {
   let widget = document.createElement('div')
   widget.className = 'widget'
   div.appendChild(widget)
@@ -35,6 +31,21 @@ let renderWidget = (div, headerStr) => {
   content.className = 'content placeholder'
   content.innerText = 'Loading...'
   widget.appendChild(content)
+
+  fetchTaboola()
+}
+
+// fetch data from Taboola endpoint
+function fetchTaboola() {
+  fetch(API).then(res => res.json()).then(json => {
+    let data = json.list
+    let contentList = document.getElementsByClassName('content')
+    for (let contentDiv of contentList) {
+      contentDiv.innerHTML = ""
+      contentDiv.className = 'content'
+      render(data, contentDiv)
+    }
+  })
 }
 
 // renders the content
@@ -75,7 +86,6 @@ let renderItem = item => {
   return itemDiv
 }
 
-
 // get geolocation from browser and reverse geocode to get the country
 navigator.geolocation.getCurrentPosition((position) => {
   getCountry(position)
@@ -90,16 +100,13 @@ let getCountry = position => {
     })
 }
 
+// translate header text based on country. May need to lookup country code to get language code.
 let translateText = country => {
   console.warn('TODO: Translate the text and put it in the header text')
-  // fetch(SOME_TRANSLATION_API).then(res => res.json()).then(data => {
+  // fetch(INSERT_TRANSLATION_API_ENDPOINT_HERE).then(res => res.json()).then(data => {
   //   let headerTextDivs = document.getElementsByClassName('header-text')
   //   for (let hdrDiv of headerTextDivs) {
   //     hdrDiv.innerText = data
   //   }
   // })
 }
-
-// render the Taboola Widget in specified location with your choice of text
-let main = document.querySelector('main')
-renderWidget(main, 'You May Like')
