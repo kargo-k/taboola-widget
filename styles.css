@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Roboto&display=swap');
+@import url("styles.css") screen and (max-width: 767px);
+
+body {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-family: 'Fjalla One', 'Roboto', 'Franklin Gothic Medium', sans-serif;
+  text-align: center;
+  font-size: 3em;
+}
+
+/* Taboola Widget Container */
+.widget {
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header section and Disclaimer */
+.header {
+  padding: 0.2em;
+  font-weight: 900;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.disclaimer {
+  font-weight: normal;
+  text-align: right;
+  font-size: 0.5em;
+}
+
+/* Content Container */
+.content {
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.placeholder {
+  background: #EEE;
+  height: 20em;
+  padding: 20px;
+  font-size: 0.75em;
+  color: #999;
+  font-style: italic;
+}
+
+/* Item Container (Img Thumbnail, Category, Title/Brand */
+.thumbnail {
+  width: 100%;
+}
+.categories {
+  text-transform: uppercase;
+  color: #FFF;
+  font-size: 0.75em;
+  background: rgba(0,0,0,0.5);
+  background: -moz-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+  background: -webkit-linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+  padding: 0 4%;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+.title {
+  font-weight: 900;
+  font-size: 1.25em;
+  color: #000;
+  line-height: 1.5em;
+  display: -webkit-box;
+  margin: 0 auto;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.title:hover {
+  text-decoration: underline;
+}
+.brand {
+  text-transform: capitalize;
+  color: #BBB;
+  font-weight: 900;
+  font-size: 0.75em;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+@media screen and (min-width: 768px) {
+  .item {
+    width: 32%;
+    position: relative;
+  }
+  .item:nth-child(3n+2) {
+    margin: 0 2%;
+  }
+  .item:hover {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .item {
+    width: 100%;
+    position: relative;
+  }
+  .item:nth-child(3n+2) {
+    margin: 0;
+  }
+  .item:hover {
+    cursor: pointer;
+  }
+}
